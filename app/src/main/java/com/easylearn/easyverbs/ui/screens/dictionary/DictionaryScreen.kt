@@ -17,6 +17,7 @@ import com.easylearn.easyverbs.data.model.Verb
 import com.easylearn.easyverbs.data.model.VerbGroup
 import com.easylearn.easyverbs.data.repository.VerbRepository
 import com.easylearn.easyverbs.util.TtsManager
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -25,6 +26,7 @@ fun DictionaryScreen(
     ttsManager: TtsManager
 ) {
     val allVerbs by repository.allVerbs.collectAsState(initial = emptyList())
+    val scope = rememberCoroutineScope()
     var searchQuery by remember { mutableStateOf("") }
     var selectedGroup by remember { mutableStateOf<String?>(null) }
     var showFavoritesOnly by remember { mutableStateOf(false) }
@@ -68,7 +70,7 @@ fun DictionaryScreen(
                     )
                     IconButton(onClick = { showFavoritesOnly = !showFavoritesOnly }) {
                         Icon(
-                            if (showFavoritesOnly) Icons.Filled.Star else Icons.Outlined.StarOutline,
+                            if (showFavoritesOnly) Icons.Filled.Star else Icons.Filled.StarBorder,
                             contentDescription = "Избранное",
                             tint = if (showFavoritesOnly) MaterialTheme.colorScheme.primary
                             else MaterialTheme.colorScheme.onSurfaceVariant
@@ -141,7 +143,7 @@ fun DictionaryScreen(
                     VerbRow(
                         verb = verb,
                         onFavoriteClick = {
-                            repository.toggleFavorite(verb.v1)
+                            scope.launch { repository.toggleFavorite(verb.v1) }
                         },
                         onSpeak = {
                             ttsManager.speak(verb.v1)
@@ -158,7 +160,9 @@ fun DictionaryScreen(
         VerbDetailDialog(
             verb = verb,
             onDismiss = { selectedVerb = null },
-            onFavoriteClick = { repository.toggleFavorite(verb.v1) },
+            onFavoriteClick = {
+                scope.launch { repository.toggleFavorite(verb.v1) }
+            },
             onSpeak = { ttsManager.speak(verb.v1) }
         )
     }
@@ -183,7 +187,7 @@ fun VerbRow(
             modifier = Modifier.size(32.dp)
         ) {
             Icon(
-                if (verb.isFavorite) Icons.Filled.Star else Icons.Outlined.StarOutline,
+                if (verb.isFavorite) Icons.Filled.Star else Icons.Filled.StarBorder,
                 contentDescription = if (verb.isFavorite) "Убрать из избранного" else "В избранное",
                 tint = if (verb.isFavorite) MaterialTheme.colorScheme.primary
                 else MaterialTheme.colorScheme.onSurfaceVariant,
@@ -256,7 +260,7 @@ fun VerbDetailDialog(
                 }
                 IconButton(onClick = onFavoriteClick) {
                     Icon(
-                        if (verb.isFavorite) Icons.Filled.Star else Icons.Outlined.StarOutline,
+                        if (verb.isFavorite) Icons.Filled.Star else Icons.Filled.StarBorder,
                         contentDescription = "Избранное",
                         tint = if (verb.isFavorite) MaterialTheme.colorScheme.primary
                         else MaterialTheme.colorScheme.onSurfaceVariant

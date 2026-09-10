@@ -94,7 +94,7 @@ fun LettersScreen(
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         Icon(
-                            Icons.Filled.Pencil,
+                            Icons.Filled.Edit,
                             contentDescription = null,
                             modifier = Modifier.size(48.dp),
                             tint = MaterialTheme.colorScheme.primary
@@ -136,7 +136,7 @@ fun LettersScreen(
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         Icon(
-                            Icons.Filled.Trophy,
+                            Icons.Filled.EmojiEvents,
                             contentDescription = null,
                             modifier = Modifier.size(48.dp),
                             tint = MaterialTheme.colorScheme.primary

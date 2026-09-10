@@ -79,7 +79,7 @@ fun ExamScreen(
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         Icon(
-                            Icons.Filled.GraduationCap,
+                            Icons.Filled.School,
                             contentDescription = null,
                             modifier = Modifier.size(48.dp),
                             tint = MaterialTheme.colorScheme.primary

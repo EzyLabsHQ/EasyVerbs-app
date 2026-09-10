@@ -1,0 +1,118 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "0870dfe7d1df3d12a5c92df0449e7cec",
+    "entities": [
+      {
+        "tableName": "verbs",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`v1` TEXT NOT NULL, `v2` TEXT NOT NULL, `v3` TEXT NOT NULL, `translation` TEXT NOT NULL, `translationEs` TEXT, `translationDe` TEXT, `translationFr` TEXT, `translationPt` TEXT, `complexity` INTEGER NOT NULL, `isCustom` INTEGER NOT NULL, `isFavorite` INTEGER NOT NULL, `errorCount` INTEGER NOT NULL, `lastErrorTimestamp` INTEGER, `lastSeenTimestamp` INTEGER, `confidence` INTEGER NOT NULL, PRIMARY KEY(`v1`))",
+        "fields": [
+          {
+            "fieldPath": "v1",
+            "columnName": "v1",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "v2",
+            "columnName": "v2",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "v3",
+            "columnName": "v3",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "translation",
+            "columnName": "translation",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "translationEs",
+            "columnName": "translationEs",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "translationDe",
+            "columnName": "translationDe",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "translationFr",
+            "columnName": "translationFr",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "translationPt",
+            "columnName": "translationPt",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "complexity",
+            "columnName": "complexity",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isCustom",
+            "columnName": "isCustom",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isFavorite",
+            "columnName": "isFavorite",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "errorCount",
+            "columnName": "errorCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastErrorTimestamp",
+            "columnName": "lastErrorTimestamp",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastSeenTimestamp",
+            "columnName": "lastSeenTimestamp",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "confidence",
+            "columnName": "confidence",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "v1"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0870dfe7d1df3d12a5c92df0449e7cec')"
+    ]
+  }
+}

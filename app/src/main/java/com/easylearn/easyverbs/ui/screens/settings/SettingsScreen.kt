@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.easylearn.easyverbs.data.local.SettingsManager
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -27,6 +28,8 @@ fun SettingsScreen(
     val smartOrder by settingsManager.smartOrder.collectAsState(initial = true)
     val questionCount by settingsManager.questionCount.collectAsState(initial = 10)
     val lang by settingsManager.lang.collectAsState(initial = "ru")
+
+    val scope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -56,6 +59,7 @@ fun SettingsScreen(
                 var expanded by remember { mutableStateOf(false) }
                 Box {
                     FilterChip(
+                        selected = true,
                         onClick = { expanded = true },
                         label = { Text("$questionCount") }
                     )
@@ -64,7 +68,7 @@ fun SettingsScreen(
                             DropdownMenuItem(
                                 text = { Text("$count") },
                                 onClick = {
-                                    settingsManager.setQuestionCount(count)
+                                    scope.launch { settingsManager.setQuestionCount(count) }
                                     expanded = false
                                 }
                             )
@@ -73,33 +77,33 @@ fun SettingsScreen(
                 }
             }
             SettingsToggle("Показывать перевод", showTranslation) {
-                settingsManager.setShowTranslation(it)
+                scope.launch { settingsManager.setShowTranslation(it) }
             }
             SettingsToggle("Автопереход", autoAdvance) {
-                settingsManager.setAutoAdvance(it)
+                scope.launch { settingsManager.setAutoAdvance(it) }
             }
             SettingsToggle("Перемешивать", shuffle) {
-                settingsManager.setShuffle(it)
+                scope.launch { settingsManager.setShuffle(it) }
             }
             SettingsToggle("Умный порядок", smartOrder) {
-                settingsManager.setSmartOrder(it)
+                scope.launch { settingsManager.setSmartOrder(it) }
             }
         }
 
         // Appearance section
         SettingsSection("Внешний вид") {
             SettingsToggle("Тёмная тема", darkMode) {
-                settingsManager.setDarkMode(it)
+                scope.launch { settingsManager.setDarkMode(it) }
             }
         }
 
         // Sound section
         SettingsSection("Звук и вибрация") {
             SettingsToggle("Звуковые эффекты", soundEnabled) {
-                settingsManager.setSoundEnabled(it)
+                scope.launch { settingsManager.setSoundEnabled(it) }
             }
             SettingsToggle("Вибрация", haptics) {
-                settingsManager.setHaptics(it)
+                scope.launch { settingsManager.setHaptics(it) }
             }
         }
 
@@ -109,6 +113,7 @@ fun SettingsScreen(
             SettingsRow("Язык") {
                 Box {
                     FilterChip(
+                        selected = true,
                         onClick = { expanded = true },
                         label = {
                             Text(when (lang) {
@@ -127,7 +132,7 @@ fun SettingsScreen(
                             DropdownMenuItem(
                                 text = { Text(name) },
                                 onClick = {
-                                    settingsManager.setLang(code)
+                                    scope.launch { settingsManager.setLang(code) }
                                     expanded = false
                                 }
                             )
@@ -141,7 +146,7 @@ fun SettingsScreen(
         SettingsSection("Данные", isDanger = true) {
             SettingsRow("Сброс прогресса") {
                 OutlinedButton(
-                    onClick = { settingsManager.resetAll() },
+                    onClick = { scope.launch { settingsManager.resetAll() } },
                     colors = ButtonDefaults.outlinedButtonColors(
                         contentColor = MaterialTheme.colorScheme.error
                     )
