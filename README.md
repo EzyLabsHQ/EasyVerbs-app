@@ -101,4 +101,10 @@ app/src/main/java/com/easylearn/easyverbs/
 
 ## Лицензия
 
-[AGPL-3.0](LICENSE)
+EasyVerbs распространяется под лицензией [GNU Affero General Public License v3.0](LICENSE) (`AGPL-3.0-only`).
+
+**Copyright © 2026 EasyLabsHQ**
+
+Кратко: вы можете свободно использовать, модифицировать и распространять программу при условии, что производные работы публикуются под той же лицензией AGPL-3.0, а исходный код доступен пользователям — в том числе при доступе через сеть (принцип network copyleft).
+
+Полный текст лицензии: [LICENSE](LICENSE)

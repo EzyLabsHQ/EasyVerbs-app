@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.easylearn.easyverbs.BuildConfig
 import com.easylearn.easyverbs.data.local.SettingsManager
 import kotlinx.coroutines.launch
 
@@ -155,6 +156,29 @@ fun SettingsScreen(
                     Spacer(modifier = Modifier.width(4.dp))
                     Text("Сбросить")
                 }
+            }
+        }
+
+        // About section
+        SettingsSection("О приложении") {
+            SettingsRow("Версия") {
+                Text(BuildConfig.VERSION_NAME, style = MaterialTheme.typography.bodyMedium)
+            }
+            SettingsRow("Лицензия") {
+                Text("AGPL-3.0", style = MaterialTheme.typography.bodyMedium)
+            }
+            SettingsRow("Правообладатель") {
+                Text("© 2026 EasyLabsHQ", style = MaterialTheme.typography.bodyMedium)
+            }
+            Column(
+                modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
+            ) {
+                Text(
+                    "Это программа — свободное ПО: вы можете распространять её и/или изменять " +
+                        "в соответствии с условиями GNU Affero General Public License версии 3.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
             }
         }
 
